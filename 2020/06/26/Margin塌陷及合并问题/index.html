@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, EFLeslie">
+    <meta name="keywords" content="Margin塌陷及合并问题, EFLeslie">
     <meta name="description" content="科教兴国，人才强国！">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | EFLeslie</title>
+    <title>Margin塌陷及合并问题 | EFLeslie</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Margin塌陷及合并问题</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-14
+                    2020-06-26
                 </div>
                 
 
@@ -458,19 +458,57 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+                <p><strong>margin塌陷</strong></p>
+<p>先举个例子</p>
+<p>&lt;style&gt; body{ background-color:#000;<br>        } .wrapper{ width:200px; height:200px; background-color:red; margin-top:100px;<br>     } .box{ width:50px; height:50px; background-color:#eee; opacity:0.8;<br>     }<br>    &lt;/style&gt;<br>&lt;/head&gt;</p>
+<body \>
+        <div class\="wrapper"\>
+            <div class\="box"\></div\>
+        </div\>
+</body\>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><img src="https://images2018.cnblogs.com/blog/1413878/201807/1413878-20180727113555586-1719243599.png" alt="">距离上边100px;</p>
+<p>现在给里面的小方块设置margin-top:100px;发现两个方块位置没动;</p>
+<p>而当给里面的小方块设置margin-top:150px;小方块带着大方块往下移动了50px</p>
+<p><strong>原理:父子嵌套元素在垂直方向的margin,父子元素是结合在一起的,他们两个的margi会取其中最大的值.</strong></p>
+<p><strong>正常情况下,父级元素应该相对浏览器进行定位,子级相对父级定位.</strong></p>
+<p><strong>但由于margin的塌陷,父级相对浏览器定位.而子级没有相对父级定位,子级相对父级,就像坍塌了一样.</strong></p>
+<p><strong>margin塌陷解决方法</strong></p>
+<p>1.给父级设置边框或内边距(不建议使用)</p>
+<p> .wrapper{ width:200px; height:200px; background-color:red; margin-top:100px; border-top:1px solid black;<br>     }</p>
+<p>2.触发bfc(块级格式上下文),改变父级的渲染规则</p>
+<p>方法:</p>
+<p>改变父级的渲染规则有以下四种方法,给父级盒子添加</p>
+<p>(1)position:absolute/fixed</p>
+<p>(2)display:inline-block;</p>
+<p>(3)float:left/right</p>
+<p>(4)overflow:hidden</p>
+<p>这四种方法都能触发bfc,但是使用的时候都会带来不同的麻烦,具体使用中还需根据具体情况选择没有影响的来解决margin塌陷</p>
+<p>** margin合并**</p>
+<p><strong>原理:两个兄弟结构的元素在垂直方向上的margin是合并的</strong></p>
+<p>html</p>
+<p>1  &lt;div class=“box1”&gt;&lt;/div&gt;<br>2  &lt;div class=“box2”&gt;&lt;/div&gt;</p>
+<p>css</p>
+<p> *{ margin: 0; padding: 0;<br>        } body { background-color: #000;<br>        } .box1 { height: 30px; margin-bottom: 100px; background-color: red;<br>        } .box2 { height: 30px; margin-top: 100px; background-color: aqua;<br>        }</p>
+<p><img src="https://images2018.cnblogs.com/blog/1413878/201807/1413878-20180727140354277-100746144.png" alt=""></p>
+<p>margin合并问题也可以用bfc解决,</p>
+<p>1.给box2加上一层父级元素并加上overflow:hidden;</p>
+ <div class="box1"></div>
+   <div class="wrapper">
+        <div class="box2"></div>
+  </div>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>.wrapper{ overflow:hidden;<br>        }</p>
+<p>2.给两个都加一层父级再加bfc</p>
+ <div class="wrapper">
+        <div class="box1"></div>
+    </div>
+    <div class="wrapper">
+        <div class="box2"></div>
+    </div>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>但是这两种方法都改变了HTML结构,在开发中是不能采用的</p>
+<p>所以在实际应用时,在margin合并这个问题上,我们一般不用bfc,而是通过只设置上面的元素的margin-bottom来解决距离的问题</p>
 
             </div>
             <hr/>
@@ -496,7 +534,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://EFLeslie.github.io/2020/06/14/hello-world/">https://EFLeslie.github.io/2020/06/14/hello-world/</a>
+                    <a href="https://EFLeslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/">https://EFLeslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -702,7 +740,7 @@
         repo: '',
         owner: '',
         admin: null,
-        id: '2020-06-14T16-35-42',
+        id: '2020-06-26T13-21-50',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -726,7 +764,7 @@
 <script src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/libs/gitment/gitment.js"></script>
 <script>
 var gitment = new Gitment({
-    id: 'Sun Jun 14 2020 16:35:42 GMT+0800',
+    id: 'Fri Jun 26 2020 13:21:50 GMT+0800',
     owner: '',
     repo: '',
     oauth: {
@@ -751,9 +789,9 @@ gitment.render('gitment-content');
 
 <script type="text/javascript">
     disqus_config = function () {
-        this.page.url = 'https://efleslie.github.io/2020/06/14/hello-world/';
-        this.page.identifier = '/2020/06/14/hello-world/';
-        this.page.title = 'Hello World';
+        this.page.url = 'https://efleslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/';
+        this.page.identifier = '/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/';
+        this.page.title = 'Margin塌陷及合并问题';
     };
     let disqus_shortname = '';
 
@@ -1110,9 +1148,50 @@ gitment.render('gitment-content');
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="Margin塌陷及合并问题">
+                        
+                        <span class="card-title">Margin塌陷及合并问题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            margin塌陷
+先举个例子
+&lt;style&gt; body{ background-color:#000;        } .wrapper{ width:200px; height:200px; background-color
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            EFLeslie
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/06/26/HTML%E7%AC%94%E8%AE%B0/">
                     <div class="card-image">
@@ -1136,45 +1215,8 @@ gitment.render('gitment-content');
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            EFLeslie
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/06/14/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
                             </span>
                         <span class="publish-author">
                             
@@ -1184,7 +1226,6 @@ gitment.render('gitment-content');
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
