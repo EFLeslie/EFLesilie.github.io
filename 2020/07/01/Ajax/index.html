@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Margin塌陷及合并问题, EFLeslie">
+    <meta name="keywords" content="Ajax, EFLeslie">
     <meta name="description" content="科教兴国，人才强国！">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Margin塌陷及合并问题 | EFLeslie</title>
+    <title>Ajax | EFLeslie</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/libs/awesome/css/all.css">
@@ -313,7 +313,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Margin塌陷及合并问题</h1>
+                    <h1 class="description center-align post-title">Ajax</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-26
+                    2020-07-01
                 </div>
                 
 
@@ -458,58 +458,233 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>margin塌陷</strong></p>
-<p>先举个例子</p>
-<p>&lt;style&gt; body{ background-color:#000;<br>        } .wrapper{ width:200px; height:200px; background-color:red; margin-top:100px;<br>     } .box{ width:50px; height:50px; background-color:#eee; opacity:0.8;<br>     }<br>    &lt;/style&gt;<br>&lt;/head&gt;</p>
-<body \>
-        <div class\="wrapper"\>
-            <div class\="box"\></div\>
-        </div\>
-</body\>
+                <p>&lt;<div id="articleContent"></p>
+<h3 id="toc-heading-1"><a href="/#Ajax的作用" class="headerlink" title="Ajax的作用" target="_blank"></a>Ajax的作用</h3><p>浏览器提供的一个方法，可以实现无刷新更新数据，提高用户浏览应用的体验。</p>
+<h3 id="toc-heading-2"><a href="/#Ajax的应用场景" class="headerlink" title="Ajax的应用场景" target="_blank"></a>Ajax的应用场景</h3><ol>
 
-<p><img src="https://images2018.cnblogs.com/blog/1413878/201807/1413878-20180727113555586-1719243599.png" alt="">距离上边100px;</p>
-<p>现在给里面的小方块设置margin-top:100px;发现两个方块位置没动;</p>
-<p>而当给里面的小方块设置margin-top:150px;小方块带着大方块往下移动了50px</p>
-<p><strong>原理:父子嵌套元素在垂直方向的margin,父子元素是结合在一起的,他们两个的margi会取其中最大的值.</strong></p>
-<p><strong>正常情况下,父级元素应该相对浏览器进行定位,子级相对父级定位.</strong></p>
-<p><strong>但由于margin的塌陷,父级相对浏览器定位.而子级没有相对父级定位,子级相对父级,就像坍塌了一样.</strong></p>
-<p><strong>margin塌陷解决方法</strong></p>
-<p>1.给父级设置边框或内边距(不建议使用)</p>
-<p> .wrapper{ width:200px; height:200px; background-color:red; margin-top:100px; border-top:1px solid black;<br>     }</p>
-<p>2.触发bfc(块级格式上下文),改变父级的渲染规则</p>
-<p>方法:</p>
-<p>改变父级的渲染规则有以下四种方法,给父级盒子添加</p>
-<p>(1)position:absolute/fixed</p>
-<p>(2)display:inline-block;</p>
-<p>(3)float:left/right</p>
-<p>(4)overflow:hidden</p>
-<p>这四种方法都能触发bfc,但是使用的时候都会带来不同的麻烦,具体使用中还需根据具体情况选择没有影响的来解决margin塌陷</p>
-<p>** margin合并**</p>
-<p><strong>原理:两个兄弟结构的元素在垂直方向上的margin是合并的</strong></p>
-<p>html</p>
-<p>1  &lt;div class=“box1”&gt;&lt;/div&gt;<br>2  &lt;div class=“box2”&gt;&lt;/div&gt;</p>
-<p>css</p>
-<p> *{ margin: 0; padding: 0;<br>        } body { background-color: #000;<br>        } .box1 { height: 30px; margin-bottom: 100px; background-color: red;<br>        } .box2 { height: 30px; margin-top: 100px; background-color: aqua;<br>        }</p>
-<p><img src="https://images2018.cnblogs.com/blog/1413878/201807/1413878-20180727140354277-100746144.png" alt=""></p>
-<p>margin合并问题也可以用bfc解决,</p>
-<p>1.给box2加上一层父级元素并加上overflow:hidden;</p>
- <div class="box1"></div>
-   <div class="wrapper">
-        <div class="box2"></div>
-  </div>
+<li>页面上拉加载更多数据</li>
+<li>列表数据无刷新分页</li>
 
-<p>.wrapper{ overflow:hidden;<br>        }</p>
-<p>2.给两个都加一层父级再加bfc</p>
- <div class="wrapper">
-        <div class="box1"></div>
-    </div>
-    <div class="wrapper">
-        <div class="box2"></div>
-    </div>
+<li>表单项离开焦点数据验证</li>
+<li>搜索框提示文字下拉列表</li>
 
-<p>但是这两种方法都改变了HTML结构,在开发中是不能采用的</p>
-<p>所以在实际应用时,在margin合并这个问题上,我们一般不用bfc,而是通过只设置上面的元素的margin-bottom来解决距离的问题</p>
+</ol>
+<h2 id="toc-heading-3"><a href="/#Ajax运行原理及实现" class="headerlink" title="Ajax运行原理及实现" target="_blank"></a>Ajax运行原理及实现</h2><h3 id="toc-heading-4"><a href="/#Ajax运行原理" class="headerlink" title="Ajax运行原理" target="_blank"></a>Ajax运行原理</h3><p>Ajax相当于浏览器发送请求与接收响应的代理人，以实现在不影响用户浏览页面的情况下，局部更新数据，从而提高用户体验。</p>
 
+<h3 id="toc-heading-5"><a href="/#Ajax的实现步骤" class="headerlink" title="Ajax的实现步骤" target="_blank"></a>Ajax的实现步骤</h3><ol>
+<li><p>创建Ajax对象</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>var xhr = new XHLHttpRequest()</code></pre></div></li>
+<li><p>告诉Ajax请求地址以及请求方式</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>xhr.open('get','http://localhost:3000')</code></pre></div></li>
+<li><p>发送请求</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>xhr.send()</code></pre></div></li>
+<li><p>获取服务器端给客服端的响应数据</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>xhr.onload = function(){
+console.log(xhr.responseText)
+
+<p>}</code></pre></div><h3 id="服务器端响应的数据格式"><a href="/#服务器端响应的数据格式" class="headerlink" title="服务器端响应的数据格式" target="_blank"></a>服务器端响应的数据格式</h3><p>服务器端大多数情况下会以JSON对象作为响应数据的格式，客户端拿到数据时要将JSON数据和HTML字符串进行拼接，再把拼接好的结果展示在页面</p></p>
+</li>
+
+</ol>
+<p> 在http请求和响应的过程中，无论时请求参数还是请求参数还是响应内容，如果时对象类型，最终都会被转换为对象字符串进行传输。</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> JSON.parse() //将json字符串转换为json对象</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> JSON.stringify() // 将json对象转换为json字符串</code></pre></div><p> 在请求头中指定 Content-Type 属性的值是 application/json，告诉服务器端当前请求参数的格式是 json。</p>
+<p> 注意：get 请求是不能提交 json 对象数据格式的，传统网站的表单提交也是不支持 json 对象数据格式的。</p>
+
+<h3 id="toc-heading-6"><a href="/#请求参数传递" class="headerlink" title="请求参数传递" target="_blank"></a>请求参数传递</h3><p> GET请求方式</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> xhr.open('get','http://www.example.com?name=zhangsan&amp;age=20')</code></pre></div><p> POST请求方式</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+xhr.send('name=zhangsan&amp;age=20')</code></pre></div><h3 id="toc-heading-7"><a href="/#请求报文" class="headerlink" title="请求报文" target="_blank"></a>请求报文</h3><p> 在http请求和响应的过程中传递的数据块就叫做报文，，包括要传送的数据和一些附加信息，这些数据和信息要遵守规定好的格式。</p>
+
+<p> 请求参数的格式</p>
+<ol>
+
+<li><p>application/x-www-form-urlencoded</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> name=zhangsan&amp;age=20&amp;sex=男</code></pre></div></li>
+
+<li><p>application/json</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> {name: 'zhangsan', age: '20', sex: '男'}</code></pre></div></li>
+
+</ol>
+<h3 id="toc-heading-8"><a href="/#获取服务器的响应" class="headerlink" title="获取服务器的响应" target="_blank"></a>获取服务器的响应</h3><h4 id="toc-heading-9"><a href="/#Ajax状态码" class="headerlink" title="Ajax状态码" target="_blank"></a>Ajax状态码</h4><p>在创建ajax对象，配置ajax对象，发送请求，以及接收完服务器端响应数据，这个过程中的每一个步骤都会对应一个数值，这个数值就是ajax状态码。</p>
+
+<ul>
+<li>0：请求未初始化(还没有调用open())</li>
+
+<li>1：请求已经建立，但是还没有发送(还没有调用send())</li>
+<li>2：请求已经发送</li>
+
+<li>3：请求正在处理中，通常响应中已经有部分数据可以用了</li>
+<li>4：响应已经完成，可以获取并使用服务器的响应了</li>
+
+</ul>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> xhr.readyState // 获取Ajax状态码</code></pre></div><h4 id="toc-heading-10"><a href="/#onreadystatechange事件" class="headerlink" title="onreadystatechange事件" target="_blank"></a>onreadystatechange事件</h4><p>当Ajax状态码发生变化时自动触发该事件</p>
+
+<p>在事件处理函数中可以获取 Ajax 状态码并对其进行判断，当状态码为 4 时就可以通过 xhr.responseText 获取服务器端的响应数据了。</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> // 当Ajax状态码发生变化时
+
+<p>xhr.onreadystatechange = function () {<br>// 判断当Ajax状态码为4时</p>
+<p>if (xhr.readyState == 4) {<br>// 获取服务器端的响应数据</p>
+<p>console.log(xhr.responseText);<br>}</p>
+<p>}</code></pre></div><h3 id="toc-heading-11"><a href="/#Ajax错误处理" class="headerlink" title="Ajax错误处理" target="_blank"></a>Ajax错误处理</h3><ol></p>
+<li>网络畅通，服务器端能接收到请求，服务器端返回的结果不是预期结果。</li>
+
+</ol>
+<p> 可以判断服务器端返回的状态码，分别进行处理。xhr.status 获取http状态码</p>
+
+<ol start="2">
+<li>网络畅通，服务器端没有接收到请求，返回404状态码。</li>
+
+</ol>
+<p> 检查请求地址是否错误。</p>
+
+<ol start="3">
+<li>网络畅通，服务器端能接收到请求，服务器端返回500状态码。</li>
+
+</ol>
+<p> 服务器端错误，找后端程序员进行沟通。</p>
+
+<ol start="4">
+<li>网络中断，请求无法发送到服务器端。</li>
+
+</ol>
+<p> 会触发xhr对象下面的onerror事件，在onerror事件处理函数中对错误进行处理。</p>
+
+<h3 id="toc-heading-12"><a href="/#低版本ie浏览器的缓存问题" class="headerlink" title="低版本ie浏览器的缓存问题" target="_blank"></a>低版本ie浏览器的缓存问题</h3><p>解决方案：在请求地址的后面加请求参数，保证每一次请求中的请求参数的值不相同</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> xhr.open('get', 'http://www.example.com?t=' + Math.random());</code></pre></div><h3 id="toc-heading-13"><a href="/#Ajax异步编程" class="headerlink" title="Ajax异步编程" target="_blank"></a>Ajax异步编程</h3><ul>
+
+<li>一个人一件事情做了一半，转而去做其他事情，当其他事情做完以后，再回过头来继续做之前未完成的事情。</li>
+<li>落实到代码上，就是异步代码虽然需要花费时间去执行，但程序不会等待异步代码执行完成后再继续执行后续代码，而是直接执行后续代码，当后续代码执行完成后再回头看异步代码是否返回结果，如果已有返回结果，再调用事先准备好的回调函数处理异步代码执行的结果。</li>
+
+</ul>
+<h2 id="toc-heading-14"><a href="/#模板引擎" class="headerlink" title="模板引擎" target="_blank"></a>模板引擎</h2><h3 id="toc-heading-15"><a href="/#使用步骤" class="headerlink" title="使用步骤" target="_blank"></a>使用步骤</h3><p>1.下载art-template模板引擎文件，并引入</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> &lt;script src="./js/template-web.js"&gt;&lt;/script&gt;</code></pre></div><p>2.准备模板</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> &lt;script id="tpl" type="text/html"&gt;
+
+<p>&lt;div class=”box”&gt;&lt;/div&gt;<br>&lt;/script&gt;</code></pre></div><p> 3.告诉模板引擎将哪一个模板和哪个数据进行拼接</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> var html = template('tpl', {username: 'zhangsan', age: '20'});</code></pre></div><p>4.将拼接好的html字符串添加到页面中</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> document.getElementById('container').innerHTML = html;</code></pre></div><ol start="5">
+
+<li>通过模板语法告诉模板引擎，数据和html字符串要如何拼接</li>
+</ol>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> &lt;script id="tpl" type="text/html"&gt;
+&lt;div class="box"&gt; {{ username }} &lt;/div&gt;
+
+<p>&lt;/script&gt;</code></pre></div><h3 id="toc-heading-16"><a href="/#FormData-对象的作用" class="headerlink" title="FormData 对象的作用" target="_blank"></a>FormData 对象的作用</h3><p>1.模拟HTML表单，相当于将HTML表单映射成表单对象，自动将表单对象中的数据拼接成请求参数的格式。</p></p>
+<p>2.异步上传二进制文件</p>
+
+<p>FormData 对象的使用</p>
+<p>1.有一个HTML表单</p>
+
+<p>2.将HTML表单转换为formData对象</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>var form = document.getElementById('form');
+
+<p>var formData = new FormData(form);</code></pre></div><p>3.提交表单对象</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>xhr.send(formData)</code></pre></div><p>注意：</p>
+
+<ul>
+<li>Formdata 对象不能用于 get 请求，因为对象需要被传递到 send 方法中，而 get 请求方式的请求参数只能放在请求地址的后面。</li>
+
+<li>服务器端 bodyParser 模块不能解析 formData 对象表单数据，我们需要使用 formidable 模块进行解析。</li>
+</ul>
+
+<h3 id="toc-heading-17"><a href="/#formData对象的实例方法" class="headerlink" title="formData对象的实例方法" target="_blank"></a>formData对象的实例方法</h3><ul>
+<li><p>获取表单对象中的属性值</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>formData.get('key')</code></pre></div></li>
+<li><p>设置表单对象中的属性的值</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>formData.set('key',value)</code></pre></div></li>
+<li><p>删除表单对象中属性的值</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>formData.delete('key')</code></pre></div></li>
+<li><p>像表单对象中追加属性值</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>formData.append('key','value')</code></pre></div><p>注意：set 方法与 append 方法的区别是，在属性名已存在的情况下，set 会覆盖已有键名的值，append会保留两个值。</p>
+</li>
+
+</ul>
+<h3 id="toc-heading-18"><a href="/#FormData二进制文件上传" class="headerlink" title="FormData二进制文件上传" target="_blank"></a>FormData二进制文件上传</h3><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>&lt;input type="file" id="file"/&gt;</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> var file = document.getElementById('file')
+
+<p>// 当用户选择文件的时候<br>file.onchange = function () {</p>
+<p>// 创建空表单对象<br>var formData = new FormData();</p>
+<p>// 将用户选择的二进制文件追加到表单对象中<br>formData.append(‘attrName’, this.files[0]);</p>
+<p>// 配置ajax对象，请求方式必须为post<br>xhr.open(‘post’, ‘<a href="http://www.example.com&#39;" target="_blank" rel="noopener">www.example.com&#39;</a>);</p>
+<p>xhr.send(formData);<br>}</code></pre></div><p>FormData文件上传进度展示</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> // 当用户选择文件的时候
+file.onchange = function () {
+
+<p>// 文件上传过程中持续触发onprogress事件<br>xhr.upload.onprogress = function (ev) {</p>
+<p>// 当前上传文件大小/文件总大小 再将结果转换为百分数<br>// 将结果赋值给进度条的宽度属性</p>
+<p>bar.style.width = (ev.loaded / ev.total) /* 100 + ‘%’;<br>}</p>
+<p>}</code></pre></div><h3 id="toc-heading-19"><a href="/#FormData文件上传图片即使预览" class="headerlink" title="FormData文件上传图片即使预览" target="_blank"></a>FormData文件上传图片即使预览</h3><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> xhr.onload = function () {<br>var result = JSON.parse(xhr.responseText);</p>
+<p>var img = document.createElement('img');<br>img.src = result.src;</p>
+<p>img.onload = function () {<br>document.body.appendChild(this);</p>
+<p>}<br>}</code></pre></div><h2 id="toc-heading-20"><a href="/#同源政策" class="headerlink" title="同源政策" target="_blank"></a>同源政策</h2><p><strong>什么时同源</strong>：如果两个页面拥有相同的协议、域名和端口，那么这两个页面就属于同一个源，其中只要有一个不相同，就是不同源。</p></p>
+<p><strong>同源的目的</strong>：同源政策是为了保证用户信息的安全，防止恶意的网站窃取数据。最初的同源政策是指 A 网站在客户端设置的 Cookie，B网站是不能访问的。随着互联网的发展，同源政策也越来越严格，在不同源的情况下，其中有一项规定就是无法向非同源地址发送Ajax 请求，如果请求，浏览器就会报错。</p>
+<h3 id="toc-heading-21"><a href="/#使用JSONP解决同源限制问题" class="headerlink" title="使用JSONP解决同源限制问题" target="_blank"></a>使用JSONP解决同源限制问题</h3><ol>
+
+<li><p>将不同源的服务器端请求地址写在 script 标签的 src 属性中</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> &lt;script src=“https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"&gt;&lt;/script&gt;</code></pre></div></li>
+
+<li><p>服务器端响应数据必须是一个函数的调用，真正要发送给客户端的数据需要作为函数调用的参数。</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> const data = 'fn({name: "张三", age: "20"})';
+
+<p>res.send(data);</code></pre></div></li></p>
+<li><p>在客户端全局作用域下定义函数 fn，并进行处理</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> function fn (data) { console.log(data); }</code></pre></div></li>
+</ol>
+
+<h4 id="toc-heading-22"><a href="/#JSONP代码优化" class="headerlink" title="JSONP代码优化" target="_blank"></a>JSONP代码优化</h4><p>1.客户端需要将函数名称传递到服务器端。</p>
+<p>2.将 script 请求的发送变成动态请求。</p>
+
+<p>3.封装 jsonp 函数，方便请求发送。</p>
+<p>4.服务器端代码优化之 res.jsonp 方法。</p>
+
+<h3 id="toc-heading-23"><a href="/#CORS跨域资源共享" class="headerlink" title="CORS跨域资源共享" target="_blank"></a>CORS跨域资源共享</h3><p>CORS：全称为 Cross-origin resource sharing，即跨域资源共享，它允许浏览器向跨域服务器发送 Ajax 请求，克服了 Ajax 只能同源使用的限制。</p>
+<p>浏览器端请求头</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> origin: http://localhost:3000</code></pre></div><p>服务器端响应头</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> Access-Control-Allow-Origin: 'http://localhost:3000'
+
+<p>Access-Control-Allow-Origin: ‘/*’<br>//Node服务器设置响应头实例</p>
+<p>app.use((req, res, next) =&gt; {<br>res.header(‘Access-Control-Allow-Origin’, ‘/*’);</p>
+<p>res.header(‘Access-Control-Allow-Methods’, ‘GET, POST’);<br>next();</p>
+<p>})</code></pre></div><h2 id="toc-heading-24"><a href="/#jQuery与Ajax" class="headerlink" title="jQuery与Ajax" target="_blank"></a>jQuery与Ajax</h2><h3 id="toc-heading-25"><a href="/#ajax-发送Ajax请求" class="headerlink" title="$.ajax() :发送Ajax请求" target="_blank"></a>$.ajax() :发送Ajax请求</h3><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> $.ajax({<br>type: 'get',</p>
+<p>url: '<a href="http://www.example.com&#39;" target="_blank" rel="noopener">http://www.example.com&#39;</a>,<br>data: { name: 'zhangsan', age: '20' },</p>
+<p>contentType: 'application/x-www-form-urlencoded',<br>beforeSend: function () {</p>
+<p>return false<br>},</p>
+<p>success: function (response) {},<br>error: function (xhr) {}</p>
+<p>});</code></pre></div><h3 id="toc-heading-26"><a href="/#ajax-发送jsonp请求" class="headerlink" title="$.ajax: 发送jsonp请求" target="_blank"></a>$.ajax: 发送jsonp请求</h3><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$.ajax({<br>url: '<a href="http://www.example.com&#39;" target="_blank" rel="noopener">http://www.example.com&#39;</a>,</p>
+<p>// 指定当前发送jsonp请求<br>dataType: 'jsonp',</p>
+<p>// 修改callback参数名称<br>jsonp: 'cb',</p>
+<p>// 指定函数名称<br>jsonCallback: 'fnName',</p>
+<p>success: function (response) {}<br>})</code></pre></div><h3 id="toc-heading-27"><a href="/#serialize方法：" class="headerlink" title="serialize方法：" target="_blank"></a>serialize方法：</h3><p>将表单中的数据自动拼接成字符串类型的参数，获取用户在表单中输入的值</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>var params = $('/#form').serialize();
+// name=zhangsan&amp;age=30</code></pre></div><h3 id="toc-heading-28"><a href="/#get-和-post-方法：" class="headerlink" title="$.get()和$.post()方法：" target="_blank"></a>$.get()和$.post()方法：</h3><p>$.get方法用于发送get请求，$.post方法用于发送post请求</p>
+
+<h3 id="toc-heading-29"><a href="/#全局事件" class="headerlink" title="全局事件" target="_blank"></a>全局事件</h3><p>只要页面有Ajax请求被发送，对应的全局事件就会触发</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>.ajaxStart() // 当请求开始发送时触发
+
+<p>.ajaxComplete() // 当请求完成时触发</code></pre></div><h4 id="toc-heading-30"><a href="/#NProgress：进度条动画" class="headerlink" title="NProgress：进度条动画" target="_blank"></a>NProgress：进度条动画</h4><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>NProgress.start(); // 进度条开始运动<br>NProgress.done(); // 进度条结束运动</code></pre></div><p>RESTful API 一套关于请求风格的规范</p></p>
+<ul>
+<li>GET： 获取数据</li>
+
+<li>POST： 添加数据</li>
+<li>PUT： 更新数据</li>
+
+<li>DELETE： 删除数据</li>
+</ul>
+
+</div>
             </div>
             <hr/>
 
@@ -534,7 +709,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://EFLeslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/">https://EFLeslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/</a>
+                    <a href="https://EFLeslie.github.io/2020/07/01/Ajax/">https://EFLeslie.github.io/2020/07/01/Ajax/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -740,7 +915,7 @@
         repo: '',
         owner: '',
         admin: null,
-        id: '2020-06-26T13-21-50',
+        id: '2020-07-01T17-25-55',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -764,7 +939,7 @@
 <script src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/libs/gitment/gitment.js"></script>
 <script>
 var gitment = new Gitment({
-    id: 'Fri Jun 26 2020 13:21:50 GMT+0800',
+    id: 'Wed Jul 01 2020 17:25:55 GMT+0800',
     owner: '',
     repo: '',
     oauth: {
@@ -789,9 +964,9 @@ gitment.render('gitment-content');
 
 <script type="text/javascript">
     disqus_config = function () {
-        this.page.url = 'https://efleslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/';
-        this.page.identifier = '/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/';
-        this.page.title = 'Margin塌陷及合并问题';
+        this.page.url = 'https://efleslie.github.io/2020/07/01/Ajax/';
+        this.page.identifier = '/2020/07/01/Ajax/';
+        this.page.title = 'Ajax';
     };
     let disqus_shortname = '';
 
@@ -1152,13 +1327,13 @@ gitment.render('gitment-content');
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/07/01/Express%E6%A1%86%E6%9E%B6%E7%89%B9%E6%80%A7/">
+                <a href="/2020/07/01/%E5%88%9D%E8%AF%86jQuery/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="Express框架特性">
+                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="初识jQuery">
                         
-                        <span class="card-title">Express框架特性</span>
+                        <span class="card-title">初识jQuery</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1166,11 +1341,7 @@ gitment.render('gitment-content');
                         
                             
 
-Express是一个基于Node平台的web应用开放框架，他提供了一系列的强大特性，帮助你创建各种web应用。我们可以使用npm install express 命令下载
-Express框架特性
-
-提供了方便简洁的路由定义方式
-对获取H
+初始jQuery什么是jQueryjQuery是一个快速、简洁的javascript库，它里面封装了JavaScript常用大的功能代码，优化了DOM操作、事件处理、动画设计和Ajax交互，学习jQuery的本质就是学习调用这些函数（方
                         
                     </div>
                     <div class="publish-info">
@@ -1195,30 +1366,28 @@ Express框架特性
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/26/HTML%E7%AC%94%E8%AE%B0/">
+                <a href="/2020/07/01/%E5%88%9D%E8%AF%86vue/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="HTML笔记">
+                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="初识vue">
                         
-                        <span class="card-title">HTML笔记</span>
+                        <span class="card-title">初识vue</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、HTML1、标题大小与字体大小的关系
-1到6号标题与1到6号字体逆序对应，比如1号字体对应6号标题，2号字体对应5号标题。
-2、HTML 水平线
- 标签在 HTML 页面中创建水平线。
-
-3、
-&lt;b&gt;加粗文本&lt;/b&g
+                            this.num++
+console.log(a, b, event.target.innerHTML);}
+}});
+&lt;/script&gt;事件修饰符.stop阻止冒泡
+&lt;a v-on:click.stop='handle'
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-01
                             </span>
                         <span class="publish-author">
                             

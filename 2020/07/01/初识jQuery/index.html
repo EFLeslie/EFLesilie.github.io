@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Margin塌陷及合并问题, EFLeslie">
+    <meta name="keywords" content="初识jQuery, EFLeslie">
     <meta name="description" content="科教兴国，人才强国！">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Margin塌陷及合并问题 | EFLeslie</title>
+    <title>初识jQuery | EFLeslie</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/libs/awesome/css/all.css">
@@ -313,7 +313,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Margin塌陷及合并问题</h1>
+                    <h1 class="description center-align post-title">初识jQuery</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-26
+                    2020-07-01
                 </div>
                 
 
@@ -458,58 +458,421 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>margin塌陷</strong></p>
-<p>先举个例子</p>
-<p>&lt;style&gt; body{ background-color:#000;<br>        } .wrapper{ width:200px; height:200px; background-color:red; margin-top:100px;<br>     } .box{ width:50px; height:50px; background-color:#eee; opacity:0.8;<br>     }<br>    &lt;/style&gt;<br>&lt;/head&gt;</p>
-<body \>
-        <div class\="wrapper"\>
-            <div class\="box"\></div\>
-        </div\>
-</body\>
+                <div id="articleContent">
 
-<p><img src="https://images2018.cnblogs.com/blog/1413878/201807/1413878-20180727113555586-1719243599.png" alt="">距离上边100px;</p>
-<p>现在给里面的小方块设置margin-top:100px;发现两个方块位置没动;</p>
-<p>而当给里面的小方块设置margin-top:150px;小方块带着大方块往下移动了50px</p>
-<p><strong>原理:父子嵌套元素在垂直方向的margin,父子元素是结合在一起的,他们两个的margi会取其中最大的值.</strong></p>
-<p><strong>正常情况下,父级元素应该相对浏览器进行定位,子级相对父级定位.</strong></p>
-<p><strong>但由于margin的塌陷,父级相对浏览器定位.而子级没有相对父级定位,子级相对父级,就像坍塌了一样.</strong></p>
-<p><strong>margin塌陷解决方法</strong></p>
-<p>1.给父级设置边框或内边距(不建议使用)</p>
-<p> .wrapper{ width:200px; height:200px; background-color:red; margin-top:100px; border-top:1px solid black;<br>     }</p>
-<p>2.触发bfc(块级格式上下文),改变父级的渲染规则</p>
-<p>方法:</p>
-<p>改变父级的渲染规则有以下四种方法,给父级盒子添加</p>
-<p>(1)position:absolute/fixed</p>
-<p>(2)display:inline-block;</p>
-<p>(3)float:left/right</p>
-<p>(4)overflow:hidden</p>
-<p>这四种方法都能触发bfc,但是使用的时候都会带来不同的麻烦,具体使用中还需根据具体情况选择没有影响的来解决margin塌陷</p>
-<p>** margin合并**</p>
-<p><strong>原理:两个兄弟结构的元素在垂直方向上的margin是合并的</strong></p>
-<p>html</p>
-<p>1  &lt;div class=“box1”&gt;&lt;/div&gt;<br>2  &lt;div class=“box2”&gt;&lt;/div&gt;</p>
-<p>css</p>
-<p> *{ margin: 0; padding: 0;<br>        } body { background-color: #000;<br>        } .box1 { height: 30px; margin-bottom: 100px; background-color: red;<br>        } .box2 { height: 30px; margin-top: 100px; background-color: aqua;<br>        }</p>
-<p><img src="https://images2018.cnblogs.com/blog/1413878/201807/1413878-20180727140354277-100746144.png" alt=""></p>
-<p>margin合并问题也可以用bfc解决,</p>
-<p>1.给box2加上一层父级元素并加上overflow:hidden;</p>
- <div class="box1"></div>
-   <div class="wrapper">
-        <div class="box2"></div>
-  </div>
+<h1 id="初始jQuery"><a href="/#初始jQuery" class="headerlink" title="初始jQuery" target="_blank"></a>初始jQuery</h1><h2 id="toc-heading-1"><a href="/#什么是jQuery" class="headerlink" title="什么是jQuery" target="_blank"></a>什么是jQuery</h2><p>jQuery是一个快速、简洁的javascript库，它里面封装了JavaScript常用大的功能代码，优化了DOM操作、事件处理、动画设计和Ajax交互，学习jQuery的本质就是学习调用这些函数（方法）；</p>
+<h2 id="toc-heading-2"><a href="/#jQuery的优点" class="headerlink" title="jQuery的优点" target="_blank"></a>jQuery的优点</h2><ul>
 
-<p>.wrapper{ overflow:hidden;<br>        }</p>
-<p>2.给两个都加一层父级再加bfc</p>
- <div class="wrapper">
-        <div class="box1"></div>
-    </div>
-    <div class="wrapper">
-        <div class="box2"></div>
-    </div>
+<li>轻量级。核心文件才几十kb，不会影响页面大的加载速度</li>
+<li>跨浏览器兼容。基本兼容了现在主流大的浏览器</li>
 
-<p>但是这两种方法都改变了HTML结构,在开发中是不能采用的</p>
-<p>所以在实际应用时,在margin合并这个问题上,我们一般不用bfc,而是通过只设置上面的元素的margin-bottom来解决距离的问题</p>
+<li>链式编程，隐式迭代 ( 隐式迭代就是把匹配的所有元素内部进行遍历循环)</li>
+<li>对事件、样式、动画支持，大大简化大的DOM操作</li>
 
+<li>支持插件扩展开发。有着丰富大的第三方插件，如树形菜单、日期控件、轮播图等</li>
+<li>免费、开源</li>
+
+</ul>
+<h2 id="toc-heading-3"><a href="/#简单的使用jQuery" class="headerlink" title="简单的使用jQuery" target="_blank"></a>简单的使用jQuery</h2><p>1.jQuery的入口函数</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> $(function() {
+$('div').hide();//此处是DOM加载完成的入口，相当与原生的DOMContentLoaded
+
+<p>})</code></pre></div><p>2.jQuery的顶级对象$</p></p>
+<p> $是jQuery的别称，在代码中jQuery和$可以互换</p>
+
+<p> $是jQuery的顶级对象，相当于原生的的window，帮元素利用$包装成jQuery对象，就可以调用jQuery的方法。</p>
+<h2 id="toc-heading-4"><a href="/#DOM对象和jQuery对象的区别" class="headerlink" title="DOM对象和jQuery对象的区别" target="_blank"></a>DOM对象和jQuery对象的区别</h2><ol>
+
+<li><p>用原生js获取来的对象就是DOM对象</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>var myDiv = document.querySelector('div'); // myDiv 是DOM对象</code></pre></div></li>
+
+<li><p>jQuery方法获取的元素就是jQuery对象</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$('div'); // $('div')是一个jQuery 对象</code></pre></div></li>
+
+<li><p>jQuery对象的本质是：利用$对DOM对象大的包装后生产的对象（伪数组形式储存）</p>
+</li>
+
+<li><p>DOM对象和jQuery对象之间是可以相互转换的</p>
+</li>
+
+<li><p>因为原生js比jQuery更大，原生的一些属性和方法jQuery没有给我们封装。要是想要这些属性和方法需要把和jQuery对象转换成DOM对象才能使用</p>
+<ul>
+
+<li>DOM对象转换为jQuery对象 $(DOM对象)</li>
+</ul>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$('div')</code></pre></div><ul>
+<li>jQuery对象转换为DOM对象(两种方式)</li>
+
+</ul>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$('div')[index] //index是索引号</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$('div').get(index)</code></pre></div><h1 id="jQuery的基本操作"><a href="/#jQuery的基本操作" class="headerlink" title="jQuery的基本操作" target="_blank"></a>jQuery的基本操作</h1><h2 id="能写出常用的jQuery选择器"><a href="/#能写出常用的jQuery选择器" class="headerlink" title="能写出常用的jQuery选择器" target="_blank"></a>能写出常用的jQuery选择器</h2><h3 id="基础选择器"><a href="/#基础选择器" class="headerlink" title="基础选择器" target="_blank"></a>基础选择器</h3><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("选择器") //直接写css选择器，但是一定要加双引号</code></pre></div><table>
+
+<thead>
+<tr>
+
+<th>用法</th>
+<th align="left">名称</th>
+
+<th>描述</th>
+</tr>
+
+</thead>
+<tbody><tr>
+
+<td>$(“/#id”)</td>
+<td align="left">Id选择器</td>
+
+<td>获取指定ID元素</td>
+</tr>
+
+<tr>
+<td>$(“/*”)</td>
+
+<td align="left">全选选择器</td>
+<td>匹配所有元素</td>
+
+</tr>
+<tr>
+
+<td>$(“.class”)</td>
+<td align="left">类选择器</td>
+
+<td>获取同一类元素</td>
+</tr>
+
+<tr>
+<td>$(“div”)</td>
+
+<td align="left">标签选择器</td>
+<td>获取同一类标签的所有元素</td>
+
+</tr>
+<tr>
+
+<td>$(“div,p,li”)</td>
+<td align="left">并集选择器</td>
+
+<td>选取多个元素</td>
+</tr>
+
+<tr>
+<td>$(“li.current”)</td>
+
+<td align="left">交集选择器</td>
+<td>交集元素</td>
+
+</tr>
+</tbody></table>
+
+<h3 id="层级选择器"><a href="/#层级选择器" class="headerlink" title="层级选择器" target="_blank"></a>层级选择器</h3><table>
+<thead>
+
+<tr>
+<th>名称</th>
+
+<th>用法</th>
+<th>描述</th>
+
+</tr>
+</thead>
+
+<tbody><tr>
+<td>子代选择器</td>
+
+<td>$(“ul&gt;li”)</td>
+<td>使用&gt;号，获取亲儿子层级的元素；注意不会获取到孙子层级的元素</td>
+
+</tr>
+<tr>
+
+<td>后代选择器</td>
+<td>$(“ul li”)</td>
+
+<td>使用空格，代表后代选择器，获取ul下的所有li元素，包括孙子</td>
+</tr>
+
+</tbody></table>
+<h3 id="筛选选择器"><a href="/#筛选选择器" class="headerlink" title="筛选选择器" target="_blank"></a>筛选选择器</h3><table>
+
+<thead>
+<tr>
+
+<th>语法</th>
+<th>用法</th>
+
+<th>描述</th>
+</tr>
+
+</thead>
+<tbody><tr>
+
+<td>:first</td>
+<td>$(“li:first”)</td>
+
+<td>获取第一个li元素</td>
+</tr>
+
+<tr>
+<td>:last</td>
+
+<td>$(“li:last”)</td>
+<td>获取最后一个li元素</td>
+
+</tr>
+<tr>
+
+<td>:ed(index)</td>
+<td>$(“li:ed(2)”)</td>
+
+<td>获取li元素中，选择索引号为2的元素</td>
+</tr>
+
+<tr>
+<td>:odd</td>
+
+<td>$(“li:odd”)</td>
+<td>获取li元素中，选择索引号为奇数的元素</td>
+
+</tr>
+<tr>
+
+<td>:even</td>
+<td>$(“li:even”)</td>
+
+<td>获取li元素中,选择索引号为偶数的元素</td>
+</tr>
+
+</tbody></table>
+<h3 id="筛选方法-重点"><a href="/#筛选方法-重点" class="headerlink" title="筛选方法(重点)" target="_blank"></a>筛选方法(重点)</h3><table>
+
+<thead>
+<tr>
+
+<th>语法</th>
+<th>用法</th>
+
+<th>说明</th>
+</tr>
+
+</thead>
+<tbody><tr>
+
+<td>parent()</td>
+<td>$(“li”).parent();</td>
+
+<td>查找父级</td>
+</tr>
+
+<tr>
+<td>children(selector)</td>
+
+<td>$(“ul”).children(“li”);</td>
+<td>相当于$(“ul&gt;li”),最近一级(亲儿子)</td>
+
+</tr>
+<tr>
+
+<td>find(selector)</td>
+<td>$(“ul”).find(“li”);</td>
+
+<td>相当于$(“ul li”),后代选择器</td>
+</tr>
+
+<tr>
+<td>siblings(selector)</td>
+
+<td>$(“.first”).siblings(“li”);</td>
+<td>查找兄弟节点。不包括自己</td>
+
+</tr>
+<tr>
+
+<td>nextAll([expr])</td>
+<td>$(“.first”).nextAll()</td>
+
+<td>查找当前元素之后所有的同辈元素</td>
+</tr>
+
+<tr>
+<td>prevtAll([expr])</td>
+
+<td>$(“.last”).pravAll()</td>
+<td>查找当前元素之前所有的同辈元素</td>
+
+</tr>
+<tr>
+
+<td>hasClass(class)</td>
+<td>$(“div”).hasClass(“protected”)</td>
+
+<td>查找当前元素是否含有某个特定的类，如果有则返回true</td>
+</tr>
+
+<tr>
+<td>eq(index)</td>
+
+<td>$(“li”).eq(2)</td>
+<td>相当于$(“li:eq(2)”),index从0开始</td>
+
+</tr>
+</tbody></table>
+
+<p>重点记住：parent() children() find() siblings() eq()</p>
+<h2 id="能够操作jQuery样式"><a href="/#能够操作jQuery样式" class="headerlink" title="能够操作jQuery样式" target="_blank"></a>能够操作jQuery样式</h2><h3 id="操作css方法"><a href="/#操作css方法" class="headerlink" title="操作css方法" target="_blank"></a>操作css方法</h3><p>jQuery可以使用css方法来修改简单元素样式；也可以操作类，修改多个样式。</p>
+
+<p>1.参数只写属性名，则返回属性值</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$(this).css("color");</code></pre></div><p>2.参数是属性名，属性值，逗号分隔，是设置一组样式，属性必须加引号，值如果是数字可以不用单位和引号</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$(this.css("color","red");</code></pre></div><p>3.参数可以是对象形式，方便设置多组样式。属性名和属性值用冒号隔开，属性可以不加引号</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$(this).css("color":"white","font-size":"20px")</code></pre></div><h3 id="设置类样式方法"><a href="/#设置类样式方法" class="headerlink" title="设置类样式方法" target="_blank"></a>设置类样式方法</h3><p>作用等同于以前的classList，可以操作类样式，注意操作类里面的参数不要加点</p>
+
+<p>1.添加类</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("div").addClass("current");</code></pre></div><p>2.移除类</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("div").removeClass("current");</code></pre></div><p>3.切换类</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("div").toggleClass("current");</code></pre></div><h3 id="类操作与ClassName区别"><a href="/#类操作与ClassName区别" class="headerlink" title="类操作与ClassName区别" target="_blank"></a>类操作与ClassName区别</h3><p>原生js中的ClassName会覆盖原先里面的类名</p>
+
+<p>jQuery里面的类操作只是对指定类进行操作，不会影响原先的类名。</p>
+<h2 id="能够写出常用的jQuery动画"><a href="/#能够写出常用的jQuery动画" class="headerlink" title="能够写出常用的jQuery动画" target="_blank"></a>能够写出常用的jQuery动画</h2><h5 id="1-显示隐藏-show-hide-toggle"><a href="/#1-显示隐藏-show-hide-toggle" class="headerlink" title="1.显示隐藏 show() hide() toggle()" target="_blank"></a>1.显示隐藏 show() hide() toggle()</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>show([speed,[easing],[fn]])
+
+<p>//(1) 参数都可以省略，无动画直接显示<br>(2)speed：三种预定速度之一的字符串(“slow”,”narmal”,”fast”)或者表示动画时长的毫秒数值</p>
+<p>(3)easing:(Optional)用来指定切换效果，默认是”swing”，可用参数”linear”.<br>(4) fn:回调函数，在动画完成时执行的函数，每个元素执行一次</p>
+<p>下面的相同</code></pre></div><h5 id="2-滑动-sideDown-sideUp-sideToggle"><a href="/#2-滑动-sideDown-sideUp-sideToggle" class="headerlink" title="2.滑动 sideDown() sideUp() sideToggle()" target="_blank"></a>2.滑动 sideDown() sideUp() sideToggle()</h5><h5 id="3-淡入淡出-fadeIn-fadeOut-fadeToggle-fadeTo"><a href="/#3-淡入淡出-fadeIn-fadeOut-fadeToggle-fadeTo" class="headerlink" title="3.淡入淡出 fadeIn() fadeOut() fadeToggle() fadeTo()" target="_blank"></a>3.淡入淡出 fadeIn() fadeOut() fadeToggle() fadeTo()</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>fadeTo(speed,opacity,[easing],[fn])<br>//(1)opacity 透明度必须写，取值0-1之间</p>
+<p>(2)speed 三种预定速度之一的字符串("slow","narmal","fast")或者表示动画时长的毫秒数值必须写</code></pre></div><h5 id="4-自定义动画-animate"><a href="/#4-自定义动画-animate" class="headerlink" title="4.自定义动画 animate()" target="_blank"></a>4.自定义动画 animate()</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>animate(params,[speed],[easing],[fn])<br>//params 想要更改的属性，以对象的形式传递，必须写，属性名可以不写引号，复合属性采用驼峰命名方式</code></pre></div><h5 id="5-动画或效果队列及其停止排队方法"><a href="/#5-动画或效果队列及其停止排队方法" class="headerlink" title="5.动画或效果队列及其停止排队方法" target="_blank"></a>5.动画或效果队列及其停止排队方法</h5><p>动画或者效果一旦触发就会执行，如果多次触发，就会造成多个动画或者效果排队执行。</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>stop() //用于停止动画或者效果，一定要写到动画前面，相当于停止结束上一次的动画</code></pre></div><h2 id="能够操作jQuery属性"><a href="/#能够操作jQuery属性" class="headerlink" title="能够操作jQuery属性" target="_blank"></a>能够操作jQuery属性</h2><h4 id="设置获取元素固有属性值prop"><a href="/#设置获取元素固有属性值prop" class="headerlink" title="设置获取元素固有属性值prop()" target="_blank"></a>设置获取元素固有属性值prop()</h4><p>所谓元素固有属性就是元素本身自带的属性；</p>
+<h5 id="1-获取属性的语法"><a href="/#1-获取属性的语法" class="headerlink" title="1.获取属性的语法" target="_blank"></a>1.获取属性的语法</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>prop("属性")</code></pre></div><h5 id="2-设置属性语法"><a href="/#2-设置属性语法" class="headerlink" title="2.设置属性语法" target="_blank"></a>2.设置属性语法</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>prop("属性"，"属性值")</code></pre></div><h4 id="设置或获取元素自定义属性attr"><a href="/#设置或获取元素自定义属性attr" class="headerlink" title="设置或获取元素自定义属性attr()" target="_blank"></a>设置或获取元素自定义属性attr()</h4><p>用户给元素添加大的属性；</p>
+
+<h5 id="1-获取属性语法"><a href="/#1-获取属性语法" class="headerlink" title="1.获取属性语法" target="_blank"></a>1.获取属性语法</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>attr("属性") //类似原生getAttribute</code></pre></div><h5 id="2-设置属性语法-1"><a href="/#2-设置属性语法-1" class="headerlink" title="2.设置属性语法" target="_blank"></a>2.设置属性语法</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>attr("属性","属性值") //类似原生setAttribute</code></pre></div><h4 id="数据缓存data"><a href="/#数据缓存data" class="headerlink" title="数据缓存data()" target="_blank"></a>数据缓存data()</h4><p>data() 方法可以在指定的元素上存取数据，并不会修改DOM元素结构。一旦页面刷新，之前存放的数据都会移除。</p>
+<h5 id="1-附加数据语法"><a href="/#1-附加数据语法" class="headerlink" title="1.附加数据语法" target="_blank"></a>1.附加数据语法</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>data("name","value") //向被选元素附加数据</code></pre></div><h5 id="2-获取数据语法"><a href="/#2-获取数据语法" class="headerlink" title="2.获取数据语法" target="_blank"></a>2.获取数据语法</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>data("name") //向被选元素获取数据</code></pre></div><p>同时还可以读取HTML5自定义属性data-index，得到的是数字型</p>
+
+<h2 id="能够操作jQuery元素"><a href="/#能够操作jQuery元素" class="headerlink" title="能够操作jQuery元素" target="_blank"></a>能够操作jQuery元素</h2><h4 id="内容文本值"><a href="/#内容文本值" class="headerlink" title="内容文本值" target="_blank"></a>内容文本值</h4><p>主要针对元素的内容还有表单的值操作</p>
+<h5 id="1-普通元素内容html-相当于原生inneHTML"><a href="/#1-普通元素内容html-相当于原生inneHTML" class="headerlink" title="1.普通元素内容html()(相当于原生inneHTML)" target="_blank"></a>1.普通元素内容html()(相当于原生inneHTML)</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>html() //获取元素的内容</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>html("内容") //设置元素的内容</code></pre></div><h5 id="2-普通元素文本内容text-相当与原生innerText"><a href="/#2-普通元素文本内容text-相当与原生innerText" class="headerlink" title="2.普通元素文本内容text() (相当与原生innerText)" target="_blank"></a>2.普通元素文本内容text() (相当与原生innerText)</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>text() //获取元素文本内容</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>text("文本内容") //设置元素文本内容</code></pre></div><h5 id="3-表单的值val-相当于原生value"><a href="/#3-表单的值val-相当于原生value" class="headerlink" title="3.表单的值val()(相当于原生value)" target="_blank"></a>3.表单的值val()(相当于原生value)</h5><h4 id="遍历元素"><a href="/#遍历元素" class="headerlink" title="遍历元素" target="_blank"></a>遍历元素</h4><p>jQuery隐式迭代是对同一类元素作了同样的操作，如果想要给同一类做不同的操作，就要用到遍历</p>
+
+<h5 id="语法1"><a href="/#语法1" class="headerlink" title="语法1" target="_blank"></a>语法1</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("div").each(function(index,domEle){xxx;})</code></pre></div><p>1.each()方法遍历匹配的每一个元素。主要用DOM处理。each每一个</p>
+<p>2.里面大的回调函数有两个参数：index是每个元素的索引号；domEle是每隔DOM元素对象不是jQuery对象</p>
+
+<p>3.所以想要使用jQuery方法，需要给这个dom元素转换为jQuery对象$(domEle)</p>
+<h5 id="语法2"><a href="/#语法2" class="headerlink" title="语法2" target="_blank"></a>语法2</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$.each(object,function(index,element){xxx;})</code></pre></div><p>1.$.each()方法可用于遍历任何对象，主要是数据处理。比如数组对象</p>
+
+<p>2.里面的函数有2个参数：index是每个元素的索引号；element遍历内容</p>
+<h4 id="添加元素"><a href="/#添加元素" class="headerlink" title="添加元素" target="_blank"></a>添加元素</h4><h5 id="1-内部添加"><a href="/#1-内部添加" class="headerlink" title="1.内部添加" target="_blank"></a>1.内部添加</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.append("内容")</code></pre></div><p>把内容放入匹配元素内部最后面，类似原生appendChild</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.prapend("内容")</code></pre></div><h5 id="2-外部添加"><a href="/#2-外部添加" class="headerlink" title="2.外部添加" target="_blank"></a>2.外部添加</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.after("内容") //把内容放入目标元素后面</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.before("内容") //把内容放入目标元素前面</code></pre></div><p>内部添加元素，生成之后，他们是父子关系</p>
+<p>外部添加元素，生成之后，他们是兄弟关系</p>
+
+<h4 id="删除元素"><a href="/#删除元素" class="headerlink" title="删除元素" target="_blank"></a>删除元素</h4><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.remove() //删除匹配的元素（本身）</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.empty() //删除匹配的元素集合中的所有子节点</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.html("") //清空匹配的元素内容</code></pre></div><h3 id="事件处理"><a href="/#事件处理" class="headerlink" title="事件处理" target="_blank"></a>事件处理</h3><h4 id="事件处理on-绑定事件"><a href="/#事件处理on-绑定事件" class="headerlink" title="事件处理on()绑定事件" target="_blank"></a>事件处理on()绑定事件</h4><p>on()方法在匹配元素上绑定一个或多个事件处理函数</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.on(events,[selector],fn)</code></pre></div><p>1.events:一个或多个空格分隔的事件类型，如click或者keydown</p>
+
+<p>2.selector：元素的子元素选择器</p>
+<p>3.fn：回调函数，即绑定在元素身上的侦听函数</p>
+
+<h4 id="on-方法的优势"><a href="/#on-方法的优势" class="headerlink" title="on()方法的优势" target="_blank"></a>on()方法的优势</h4><h5 id="1-可以绑定多个事件-多个事件处理程序"><a href="/#1-可以绑定多个事件-多个事件处理程序" class="headerlink" title="1.可以绑定多个事件 多个事件处理程序" target="_blank"></a>1.可以绑定多个事件 多个事件处理程序</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("div").on({
+mouseover:function(){},
+
+<p>mouseout:function(){},<br>click:function(){}</p>
+<p>});</code></pre></div><p>如果事件处理程序相同</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("div").on("mouseover mouseout",function(){
+
+<p>$(this).toggleClass(“current”);<br>});</code></pre></div><h5 id="2-可以事件委派操作，事件委派的定义就是，把原来加给子元素事件绑定在父元素身上，就是把事件委派给父元素"><a href="/#2-可以事件委派操作，事件委派的定义就是，把原来加给子元素事件绑定在父元素身上，就是把事件委派给父元素" class="headerlink" title="2.可以事件委派操作，事件委派的定义就是，把原来加给子元素事件绑定在父元素身上，就是把事件委派给父元素" target="_blank"></a>2.可以事件委派操作，事件委派的定义就是，把原来加给子元素事件绑定在父元素身上，就是把事件委派给父元素</h5><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$('ul').on('click','li',function(){</p>
+<p>alert('hello world!');<br>});</code></pre></div><p>在此之前有bind(),live() delegate()等方法来处理事件绑定或者事件委派，最新版用on代替他们</p></p>
+<h5 id="3-动态创建的元素，click-没有办法绑定事件，on-可以给动态生成的元素绑定事件"><a href="/#3-动态创建的元素，click-没有办法绑定事件，on-可以给动态生成的元素绑定事件" class="headerlink" title="3.动态创建的元素，click()没有办法绑定事件，on()可以给动态生成的元素绑定事件" target="_blank"></a>3.动态创建的元素，click()没有办法绑定事件，on()可以给动态生成的元素绑定事件</h5><h4 id="事件处理off-解绑事件"><a href="/#事件处理off-解绑事件" class="headerlink" title="事件处理off()解绑事件" target="_blank"></a>事件处理off()解绑事件</h4><p>off()方法可以移除通过on()方法添加的事件处理程序</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("p").off() //解绑p元素所有事件处理程序
+
+<p>$(“p”).off(“click”) //解绑p元素上面的点击事件<br>$(“ul”).off(“click”,”li”); //解绑事件委托</code></pre></div><p>如果事件只想触发一次，可以使用one()来绑定事件</p></p>
+<h4 id="自动触发事件trigger"><a href="/#自动触发事件trigger" class="headerlink" title="自动触发事件trigger()" target="_blank"></a>自动触发事件trigger()</h4><p>有些时间希望自动触发，比如轮播图自动播放功能跟点击右侧按钮一致，可以利用定时器自动触发右侧按钮的点击事件，不必鼠标点击触发</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.click() //第一种简写方式</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.trigger("type") //第二种自动触发模式</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$("p").on("click",function(){
+
+<p>alert(“hi~”);<br>});</p>
+<p>$(“p”).trigger(“click”); //此时自动触发点击事件，不需要鼠标点击</code></pre></div><h4 id="jQuery事件对象"><a href="/#jQuery事件对象" class="headerlink" title="jQuery事件对象" target="_blank"></a>jQuery事件对象</h4><p>事件被触发，就会有事件对象的产生。</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>element.on(events,[selector],function(event){})</code></pre></div><p>阻止默认行为：event.preventDefault() 或者 return false</p>
+
+<p>阻止冒泡：event.stopPropagation</p>
+<h4 id="jQuery对象拷贝"><a href="/#jQuery对象拷贝" class="headerlink" title="jQuery对象拷贝" target="_blank"></a>jQuery对象拷贝</h4><p>如果想要把某个对象拷贝（合并）给另外一个对象使用，此时可以使用$.extend()方法</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>$.extend([deep],target,object,[objectN])</code></pre></div><p>1.deep:如果设为true为深拷贝，默认false为浅拷贝</p>
+<p>2.target：要拷贝的目标对象</p>
+
+<p>3.object1：代拷贝到第一个对象的对象</p>
+<p>4.objectN：待拷贝到第N个对象的对象</p>
+
+<p>5.浅拷贝是把被拷贝的对象复杂数据类型中的地址拷贝给目标对象，修改目标对象会影响被拷贝对象</p>
+<p>6.深拷贝，前面加true，完全克隆（拷贝的对象，而不是地址），修改的目标对象不会影响被拷贝的对象。</p>
+
+<h4 id="jQuery多库共存"><a href="/#jQuery多库共存" class="headerlink" title="jQuery多库共存" target="_blank"></a>jQuery多库共存</h4><p>jQuery使用$作为标识符随着jQuery的流行，其他js库也用这$作为标识符，这样一来就会引起冲突。需要一个解决方案，让jQuery和其他的js和其他的js库不存在冲突，可以同时存在。这就叫做多库共存。</p>
+<h5 id="解决方案"><a href="/#解决方案" class="headerlink" title="解决方案" target="_blank"></a>解决方案</h5><p>1.把里面的$符号统一改为jQuery。比如jQuery(“div”)</p>
+
+<p>2.jQuery变量规定新的名称：$.noConflict() 如： var xxx =$.noConflict();</p>
+<h4 id="jQuery插件"><a href="/#jQuery插件" class="headerlink" title="jQuery插件" target="_blank"></a>jQuery插件</h4><p>1.jQuery插件库 <a href="http://www.jq22.com/" target="_blank" rel="noopener">http://www.jq22.com/</a></p>
+
+<p>2.jQuery之家<a href="http://www.htmleaf.com/" target="_blank" rel="noopener">http://www.htmleaf.com/</a></p>
+<h5 id="使用步骤"><a href="/#使用步骤" class="headerlink" title="使用步骤" target="_blank"></a>使用步骤</h5><p>1.引入相关文件（jQuery文件和插件文件）</p>
+
+<p>2.复制相关的html，css，js（调用插件）</p>
+<h5 id="常用插件"><a href="/#常用插件" class="headerlink" title="常用插件" target="_blank"></a>常用插件</h5><p>1.瀑布流</p>
+
+<p>2.图片懒加载(图片使用延迟加载在可提高网页下载速度，它也能帮助减轻服务器负载)</p>
+<p>当我们页面滑动得到可视区域，在显示图片，使用插件库的EasyLazyload，注意此时引入的文件和js调用必须写在DOM元素（图片）最后面</p>
+
+<p>3.全屏滚动（fullpage.js)</p>
+<p>GitHub：<a href="https://github.com/alvarotrigo/fullPage.js" target="_blank" rel="noopener">https://github.com/alvarotrigo/fullPage.js</a></p>
+
+<p>中文翻译网：<a href="http://www.dowebok.com/demo/2014/77/" target="_blank" rel="noopener">http://www.dowebok.com/demo/2014/77/</a></p>
+<p>bootstrap中文文档<a href="https://v3.bootcss.com" target="_blank" rel="noopener">https://v3.bootcss.com</a></p>
+
+<h2 id="能够操作jQuery元素尺寸、位置"><a href="/#能够操作jQuery元素尺寸、位置" class="headerlink" title="能够操作jQuery元素尺寸、位置" target="_blank"></a>能够操作jQuery元素尺寸、位置</h2><h4 id="jQuery尺寸"><a href="/#jQuery尺寸" class="headerlink" title="jQuery尺寸" target="_blank"></a>jQuery尺寸</h4><table>
+<thead>
+
+<tr>
+<th>语法</th>
+
+<th>用法</th>
+</tr>
+
+</thead>
+<tbody><tr>
+
+<td>width()/height()</td>
+<td>取得匹配元素宽度和高度值 只算width/height</td>
+
+</tr>
+<tr>
+
+<td>innerWidth() /innerHeight()</td>
+<td>取得匹配元素宽度和高度值 包含padding</td>
+
+</tr>
+<tr>
+
+<td>outerWidth()/outerheight()</td>
+<td>取得匹配元素的宽度和高度值 包含padding、border</td>
+
+</tr>
+<tr>
+
+<td>outerWidth(ture)/outerHeight(ture)</td>
+<td>取得匹配元素宽度和高度值 包含padding、border、margin</td>
+
+</tr>
+</tbody></table>
+
+<p>以上参数为空，则是获取相应值，返回的是 数字型</p>
+<p>如果参数为数字，则是修改相应值</p>
+
+<p>参数可以不必写单位</p>
+<h4 id="jQuery位置"><a href="/#jQuery位置" class="headerlink" title="jQuery位置" target="_blank"></a>jQuery位置</h4><p>位置主要有三个：offset()、position()、scrollTop()/scrollLeft()</p>
+
+<h5 id="1-offset-设置或获取元素偏移"><a href="/#1-offset-设置或获取元素偏移" class="headerlink" title="1.offset()设置或获取元素偏移" target="_blank"></a>1.offset()设置或获取元素偏移</h5><p>offset()方法设置或返回被选中元素相当于文档的偏移坐标，跟父级没有关系</p>
+<p>该方法有2个属性left、top、offset()、top 用于获取距离文档顶部的距离，offset().left用于获取距离文档左侧的距离。</p>
+
+<p>可以设置元素的偏移：offset({top:10,left:30});</p>
+<h5 id="2-position-获取元素偏移"><a href="/#2-position-获取元素偏移" class="headerlink" title="2.position() 获取元素偏移" target="_blank"></a>2.position() 获取元素偏移</h5><p>position()方法用于返回被选元素相对于带有定位的父级偏移坐标，如果父级都没有定位，则以文档为准。这个方法只能获取不能设置偏移。</p>
+
+<h5 id="3-scrollTop-scrollLeft-设置或获取元素被卷去的头不和左侧"><a href="/#3-scrollTop-scrollLeft-设置或获取元素被卷去的头不和左侧" class="headerlink" title="3.scrollTop() /scrollLeft()设置或获取元素被卷去的头不和左侧" target="_blank"></a>3.scrollTop() /scrollLeft()设置或获取元素被卷去的头不和左侧</h5><p>srcollTop()方法设置或返回被选元素被卷去的头部</p>
+</li>
+
+</ol>
+</div>
             </div>
             <hr/>
 
@@ -534,7 +897,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://EFLeslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/">https://EFLeslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/</a>
+                    <a href="https://EFLeslie.github.io/2020/07/01/%E5%88%9D%E8%AF%86jQuery/">https://EFLeslie.github.io/2020/07/01/%E5%88%9D%E8%AF%86jQuery/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -740,7 +1103,7 @@
         repo: '',
         owner: '',
         admin: null,
-        id: '2020-06-26T13-21-50',
+        id: '2020-07-01T17-27-09',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -764,7 +1127,7 @@
 <script src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/libs/gitment/gitment.js"></script>
 <script>
 var gitment = new Gitment({
-    id: 'Fri Jun 26 2020 13:21:50 GMT+0800',
+    id: 'Wed Jul 01 2020 17:27:09 GMT+0800',
     owner: '',
     repo: '',
     oauth: {
@@ -789,9 +1152,9 @@ gitment.render('gitment-content');
 
 <script type="text/javascript">
     disqus_config = function () {
-        this.page.url = 'https://efleslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/';
-        this.page.identifier = '/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/';
-        this.page.title = 'Margin塌陷及合并问题';
+        this.page.url = 'https://efleslie.github.io/2020/07/01/%E5%88%9D%E8%AF%86jQuery/';
+        this.page.identifier = '/2020/07/01/%E5%88%9D%E8%AF%86jQuery/';
+        this.page.title = '初识jQuery';
     };
     let disqus_shortname = '';
 
@@ -1152,13 +1515,13 @@ gitment.render('gitment-content');
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/07/01/Express%E6%A1%86%E6%9E%B6%E7%89%B9%E6%80%A7/">
+                <a href="/2020/07/01/node.js/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="Express框架特性">
+                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="node.js">
                         
-                        <span class="card-title">Express框架特性</span>
+                        <span class="card-title">node.js</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1166,11 +1529,8 @@ gitment.render('gitment-content');
                         
                             
 
-Express是一个基于Node平台的web应用开放框架，他提供了一系列的强大特性，帮助你创建各种web应用。我们可以使用npm install express 命令下载
-Express框架特性
-
-提供了方便简洁的路由定义方式
-对获取H
+node概念node是基于Chrome V8引擎的JavaScript代码运行环境，全局对象是globle，在node环境下使用node命令执行后缀为.js的文件即可
+CommonJScommonJS是为js的表现制定规范，因为js没有
                         
                     </div>
                     <div class="publish-info">
@@ -1195,30 +1555,35 @@ Express框架特性
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/26/HTML%E7%AC%94%E8%AE%B0/">
+                <a href="/2020/07/01/Ajax/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="HTML笔记">
+                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="Ajax">
                         
-                        <span class="card-title">HTML笔记</span>
+                        <span class="card-title">Ajax</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、HTML1、标题大小与字体大小的关系
-1到6号标题与1到6号字体逆序对应，比如1号字体对应6号标题，2号字体对应5号标题。
-2、HTML 水平线
- 标签在 HTML 页面中创建水平线。
+                            &lt;
+Ajax的作用浏览器提供的一个方法，可以实现无刷新更新数据，提高用户浏览应用的体验。
+Ajax的应用场景
 
-3、
-&lt;b&gt;加粗文本&lt;/b&g
+页面上拉加载更多数据
+列表数据无刷新分页
+
+表单项离开焦点数据验证
+搜索框提示文字下拉列表
+
+
+Ajax运行原理及实现Aj
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-01
                             </span>
                         <span class="publish-author">
                             

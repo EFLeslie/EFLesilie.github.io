@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Margin塌陷及合并问题, EFLeslie">
+    <meta name="keywords" content="Express框架特性, EFLeslie">
     <meta name="description" content="科教兴国，人才强国！">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Margin塌陷及合并问题 | EFLeslie</title>
+    <title>Express框架特性 | EFLeslie</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/libs/awesome/css/all.css">
@@ -313,7 +313,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Margin塌陷及合并问题</h1>
+                    <h1 class="description center-align post-title">Express框架特性</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-26
+                    2020-07-01
                 </div>
                 
 
@@ -458,58 +458,109 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>margin塌陷</strong></p>
-<p>先举个例子</p>
-<p>&lt;style&gt; body{ background-color:#000;<br>        } .wrapper{ width:200px; height:200px; background-color:red; margin-top:100px;<br>     } .box{ width:50px; height:50px; background-color:#eee; opacity:0.8;<br>     }<br>    &lt;/style&gt;<br>&lt;/head&gt;</p>
-<body \>
-        <div class\="wrapper"\>
-            <div class\="box"\></div\>
-        </div\>
-</body\>
+                <div id="articleContent">
 
-<p><img src="https://images2018.cnblogs.com/blog/1413878/201807/1413878-20180727113555586-1719243599.png" alt="">距离上边100px;</p>
-<p>现在给里面的小方块设置margin-top:100px;发现两个方块位置没动;</p>
-<p>而当给里面的小方块设置margin-top:150px;小方块带着大方块往下移动了50px</p>
-<p><strong>原理:父子嵌套元素在垂直方向的margin,父子元素是结合在一起的,他们两个的margi会取其中最大的值.</strong></p>
-<p><strong>正常情况下,父级元素应该相对浏览器进行定位,子级相对父级定位.</strong></p>
-<p><strong>但由于margin的塌陷,父级相对浏览器定位.而子级没有相对父级定位,子级相对父级,就像坍塌了一样.</strong></p>
-<p><strong>margin塌陷解决方法</strong></p>
-<p>1.给父级设置边框或内边距(不建议使用)</p>
-<p> .wrapper{ width:200px; height:200px; background-color:red; margin-top:100px; border-top:1px solid black;<br>     }</p>
-<p>2.触发bfc(块级格式上下文),改变父级的渲染规则</p>
-<p>方法:</p>
-<p>改变父级的渲染规则有以下四种方法,给父级盒子添加</p>
-<p>(1)position:absolute/fixed</p>
-<p>(2)display:inline-block;</p>
-<p>(3)float:left/right</p>
-<p>(4)overflow:hidden</p>
-<p>这四种方法都能触发bfc,但是使用的时候都会带来不同的麻烦,具体使用中还需根据具体情况选择没有影响的来解决margin塌陷</p>
-<p>** margin合并**</p>
-<p><strong>原理:两个兄弟结构的元素在垂直方向上的margin是合并的</strong></p>
-<p>html</p>
-<p>1  &lt;div class=“box1”&gt;&lt;/div&gt;<br>2  &lt;div class=“box2”&gt;&lt;/div&gt;</p>
-<p>css</p>
-<p> *{ margin: 0; padding: 0;<br>        } body { background-color: #000;<br>        } .box1 { height: 30px; margin-bottom: 100px; background-color: red;<br>        } .box2 { height: 30px; margin-top: 100px; background-color: aqua;<br>        }</p>
-<p><img src="https://images2018.cnblogs.com/blog/1413878/201807/1413878-20180727140354277-100746144.png" alt=""></p>
-<p>margin合并问题也可以用bfc解决,</p>
-<p>1.给box2加上一层父级元素并加上overflow:hidden;</p>
- <div class="box1"></div>
-   <div class="wrapper">
-        <div class="box2"></div>
-  </div>
+<p>Express是一个基于Node平台的web应用开放框架，他提供了一系列的强大特性，帮助你创建各种web应用。我们可以使用npm install express 命令下载</p>
+<h2 id="toc-heading-1"><a href="/#Express框架特性" class="headerlink" title="Express框架特性" target="_blank"></a>Express框架特性</h2><ul>
 
-<p>.wrapper{ overflow:hidden;<br>        }</p>
-<p>2.给两个都加一层父级再加bfc</p>
- <div class="wrapper">
-        <div class="box1"></div>
-    </div>
-    <div class="wrapper">
-        <div class="box2"></div>
-    </div>
+<li>提供了方便简洁的路由定义方式</li>
+<li>对获取HTTP请求参数进行了简化处理</li>
 
-<p>但是这两种方法都改变了HTML结构,在开发中是不能采用的</p>
-<p>所以在实际应用时,在margin合并这个问题上,我们一般不用bfc,而是通过只设置上面的元素的margin-bottom来解决距离的问题</p>
+<li>对模板引擎支持程度高，方便渲染动态HTML页面</li>
+<li>提供中间件机制有效控制HTTP请求</li>
 
+<li>拥有大量中间件对功能进行扩展</li>
+</ul>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>// 引入express框架
+const express = require('express');
+
+<p>// 创建网站服务器<br>const app = express();</p>
+<p>app.get(‘/‘ , (req, res) =&gt; {<br>// send()</p>
+<p>// 1. send方法内部会检测响应内容的类型<br>// 2. send方法会自动设置http状态码</p>
+<p>// 3. send方法会帮我们自动设置响应的内容类型及编码<br>res.send(‘Hello. Express’);</p>
+<p>})<br>// 监听端口</p>
+<p>app.listen(3000);</code></pre></div><h2 id="toc-heading-2"><a href="/#中间件" class="headerlink" title="中间件" target="_blank"></a>中间件</h2><p>中间件就是一堆方法，可以接受客户端放来的请求，可以对请求做出响应，也可以将请求继续交给下一个中间件继续处理。</p></p>
+<p>中间件由两部分构成，中间件方法以及请求处理函数；中间件方法由Exprss提供，负责拦截请求，请求函数有开发人员提供，负责处理请求。</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.get('请求路径', '处理函数') // 接收并处理get请求
+app.post('请求路径', '处理函数') // 接收并处理post请求</code></pre></div><p>可以针对同一个请求设置多个中间件，对同一个请求进行多次处理。默认情况下，请求从上到下依次匹配中间件，一旦匹配成功，终止匹配。可以调用next方法将请求的控制权交给下一个中间件，直到遇到结束请求的中间件。</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.get('/request', (req, res, next) =&gt; {
+req.name = "张三";
+
+<p>next();<br>});</p>
+<p>app.get(‘/request’, (req, res) =&gt; {<br>res.send(req.name);</p>
+<p>});</code></pre></div><h3 id="toc-heading-3"><a href="/#app-use中间件用法" class="headerlink" title="app.use中间件用法" target="_blank"></a>app.use中间件用法</h3><p>app.use 匹配所有请求方式，可以直接传入请求处理函数，代表接受所有请求。第一个参数可以省略表示通配。</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.use('/admin', (req, res, next) =&gt; {
+
+<p>console.log(req.url);<br>next();</p>
+<p>});</code></pre></div><h3 id="toc-heading-4"><a href="/#中间件的应用" class="headerlink" title="中间件的应用" target="_blank"></a>中间件的应用</h3><ol></p>
+<li>路由保护，客户端在访问需要登录的页面时，可以先使用中间件判断用户登录状态，用户如果未登录，则拦截请求，直接响应，禁止用户进入需要登录的页面。</li>
+
+<li>网站维护公告，在所有路由的最上面定义接收所有请求的中间件，直接为客户端做出响应，网站正在维护中。</li>
+<li>自定义404页面</li>
+
+</ol>
+<h3 id="toc-heading-5"><a href="/#错误处理中间件" class="headerlink" title="错误处理中间件" target="_blank"></a>错误处理中间件</h3><p>在程序执行的过程中，不可避免的会出现一些无法预料的错误，比如文件读取失败，数据库连接失败。错误处理中间件是一个集中处理错误的地方。</p>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.use((err, req, res, next) =&gt; {
+res.status(500).send('服务器发生未知错误');
+
+<p>})</code></pre></div><p>当程序出现错误时，调用next()方法，并且将错误信息通过参数的形式传递给next()方法，即可触发错误处理中间件</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.get("/", (req, res, next) =&gt; {
+
+<p>fs.readFile(“/file-does-not-exist”, (err, data) =&gt; {<br>if (err) {</p>
+<p>next(err);<br>}</p>
+<p>});<br>});</code></pre></div><h3 id="toc-heading-6"><a href="/#捕获错误" class="headerlink" title="捕获错误" target="_blank"></a>捕获错误</h3><p>在node.js中，异步API的错误信息都是通过回调函数获取的，支持Promise对象的异步API发生错误可以通过catch方法捕获。</p></p>
+<p>异步函数执行如果发生错误可以通过 try catch 捕获异步函数以及其他同步代码在执行过程中发生的错误，但是不能其他类型的API发生的错误。</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.get("/", async (req, res, next) =&gt; {
+
+<p>try {<br>await User.find({name: ‘张三’})</p>
+<p>}catch(ex) {<br>next(ex);</p>
+<p>}<br>});</code></pre></div><h2 id="toc-heading-7"><a href="/#Express请求处理" class="headerlink" title="Express请求处理" target="_blank"></a>Express请求处理</h2><h3 id="toc-heading-8"><a href="/#模块化路由" class="headerlink" title="模块化路由" target="_blank"></a>模块化路由</h3><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>const home = express.Router();</p>
+<p>// 为路由对象匹配请求路径<br>app.use('/home', home);</p>
+<p>// 创建二级路由<br>home.get('/index', (req, res) =&gt; {</p>
+<p>res.send('欢迎来到博客首页页面')<br>})</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> // admin.js</p>
+<p>const admin = express.Router();<br>admin.get('/index', () =&gt; {</p>
+<p>res.send('欢迎来到博客管理页面');<br>});</p>
+<p>module.exports = admin;</code></pre></div><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code>const admin = require('./route/admin.js');<br>app.use('/admin', admin);</code></pre></div><h3 id="toc-heading-9"><a href="/#GET-参数的获取" class="headerlink" title="GET 参数的获取" target="_blank"></a>GET 参数的获取</h3><p>Express框架中使用<strong>req.query</strong>即可获取GET参数，框架内部会将GET参数转换为对象并返回。</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> // 接收地址栏中问号后面的参数
+// 例如: http://localhost:3000/?name=zhangsan&amp;age=30
+
+<p>app.get(‘/‘, (req, res) =&gt; {<br>console.log(req.query); // {“name”: “zhangsan”, “age”: “30”}</p>
+<p>});</code></pre></div><h3 id="toc-heading-10"><a href="/#POST参数的获取" class="headerlink" title="POST参数的获取" target="_blank"></a>POST参数的获取</h3><p>Express中接收post请求参数需要借助第三方包 body-parser。</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> // 引入body-parser模块
+
+<p>const bodyParser = require(‘body-parser’);<br>// 配置body-parser模块</p>
+<p>// extended: false 方法内部使用querystring模块处理请求参数的格式<br>// extended: true 方法内部使用第三方模块qs处理请求参数的格式</p>
+<p>app.use(bodyParser.urlencoded({ extended: false }));<br>// 接收请求</p>
+<p>app.post(‘/add’, (req, res) =&gt; {<br>// 接收请求参数</p>
+<p>console.log(req.body);<br>}) </code></pre></div><h3 id="toc-heading-11"><a href="/#路由参数" class="headerlink" title="路由参数" target="_blank"></a>路由参数</h3><div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.get('/find/:id', (req, res) =&gt; {</p>
+<p>console.log(req.params); // {id: 123}<br>});</code></pre></div><p>访问的是<code>localhost:3000/find/123</code></p></p>
+<h3 id="toc-heading-12"><a href="/#静态资源的处理" class="headerlink" title="静态资源的处理" target="_blank"></a>静态资源的处理</h3><p>通过Express内置的<strong>express.static</strong>可以方便地托管静态文件，例如img、CSS、JavaScript 文件等。</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.use(express.static('public'));</code></pre></div><p>这样public下的静态资源就可以访问了</p>
+
+<h2 id="toc-heading-13"><a href="/#Express-art-template模板引擎" class="headerlink" title="Express-art-template模板引擎" target="_blank"></a>Express-art-template模板引擎</h2><h3 id="toc-heading-14"><a href="/#模板引擎" class="headerlink" title="模板引擎" target="_blank"></a>模板引擎</h3><ul>
+<li>为了使art-template模板引擎能够更好的和Express框架配合，模板引擎官方在原art-template模板引擎的基础上封装了express-art-template。</li>
+
+<li>使用npm install art-template express-art-template命令进行安装。</li>
+</ul>
+
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> // 当渲染后缀为art的模板时 使用express-art-template
+app.engine('art', require('express-art-template'));
+
+<p>// 设置模板存放目录<br>app.set(‘views’, path.join(__dirname, ‘views’));</p>
+<p>// 渲染模板时不写后缀 默认拼接art后缀<br>app.set(‘view engine’, ‘art’);</p>
+<p>app.get(‘/‘, (req, res) =&gt; {<br>// 渲染模板</p>
+<p>res.render(‘index’);<br>}); </code></pre></div><h3 id="toc-heading-15"><a href="/#app-locals对象" class="headerlink" title="app.locals对象" target="_blank"></a>app.locals对象</h3><p>将变量设置到app.locals对象下面，这个数据在所有的模板中都可以获取到。</p></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言"></div><pre><code> app.locals.users = [{
+name: '张三',
+
+<p>age: 20<br>},{</p>
+<p>name: ‘李四’,<br>age: 20</p>
+<p>}]</code></pre></div></p>
+</div>
             </div>
             <hr/>
 
@@ -534,7 +585,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://EFLeslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/">https://EFLeslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/</a>
+                    <a href="https://EFLeslie.github.io/2020/07/01/Express%E6%A1%86%E6%9E%B6%E7%89%B9%E6%80%A7/">https://EFLeslie.github.io/2020/07/01/Express%E6%A1%86%E6%9E%B6%E7%89%B9%E6%80%A7/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -740,7 +791,7 @@
         repo: '',
         owner: '',
         admin: null,
-        id: '2020-06-26T13-21-50',
+        id: '2020-07-01T17-21-13',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -764,7 +815,7 @@
 <script src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/libs/gitment/gitment.js"></script>
 <script>
 var gitment = new Gitment({
-    id: 'Fri Jun 26 2020 13:21:50 GMT+0800',
+    id: 'Wed Jul 01 2020 17:21:13 GMT+0800',
     owner: '',
     repo: '',
     oauth: {
@@ -789,9 +840,9 @@ gitment.render('gitment-content');
 
 <script type="text/javascript">
     disqus_config = function () {
-        this.page.url = 'https://efleslie.github.io/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/';
-        this.page.identifier = '/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/';
-        this.page.title = 'Margin塌陷及合并问题';
+        this.page.url = 'https://efleslie.github.io/2020/07/01/Express%E6%A1%86%E6%9E%B6%E7%89%B9%E6%80%A7/';
+        this.page.identifier = '/2020/07/01/Express%E6%A1%86%E6%9E%B6%E7%89%B9%E6%80%A7/';
+        this.page.title = 'Express框架特性';
     };
     let disqus_shortname = '';
 
@@ -1152,25 +1203,23 @@ gitment.render('gitment-content');
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/07/01/Express%E6%A1%86%E6%9E%B6%E7%89%B9%E6%80%A7/">
+                <a href="/2020/07/01/%E5%88%9D%E8%AF%86vue/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="Express框架特性">
+                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="初识vue">
                         
-                        <span class="card-title">Express框架特性</span>
+                        <span class="card-title">初识vue</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-
-Express是一个基于Node平台的web应用开放框架，他提供了一系列的强大特性，帮助你创建各种web应用。我们可以使用npm install express 命令下载
-Express框架特性
-
-提供了方便简洁的路由定义方式
-对获取H
+                            this.num++
+console.log(a, b, event.target.innerHTML);}
+}});
+&lt;/script&gt;事件修饰符.stop阻止冒泡
+&lt;a v-on:click.stop='handle'
                         
                     </div>
                     <div class="publish-info">
@@ -1195,25 +1244,21 @@ Express框架特性
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/26/HTML%E7%AC%94%E8%AE%B0/">
+                <a href="/2020/06/26/Margin%E5%A1%8C%E9%99%B7%E5%8F%8A%E5%90%88%E5%B9%B6%E9%97%AE%E9%A2%98/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="HTML笔记">
+                        <img src="https://cdn.jsdelivr.net/gh/EFLeslie/EFLeslie.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="Margin塌陷及合并问题">
                         
-                        <span class="card-title">HTML笔记</span>
+                        <span class="card-title">Margin塌陷及合并问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、HTML1、标题大小与字体大小的关系
-1到6号标题与1到6号字体逆序对应，比如1号字体对应6号标题，2号字体对应5号标题。
-2、HTML 水平线
- 标签在 HTML 页面中创建水平线。
-
-3、
-&lt;b&gt;加粗文本&lt;/b&g
+                            margin塌陷
+先举个例子
+&lt;style&gt; body{ background-color:#000;        } .wrapper{ width:200px; height:200px; background-color
                         
                     </div>
                     <div class="publish-info">
